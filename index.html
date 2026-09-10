@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skar Finance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top">
+      <span class="brand-name">SKAR<span>·</span>FINANCE</span>
+    </a>
+    <nav class="links">
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="login.html">Entrar</a>
+      <a class="btn btn-primary" href="cadastro.html">Criar conta</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero" style="border-top:none; padding-top:80px;">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">GESTÃO PATRIMONIAL INTELIGENTE</p>
+        <h1>Seu dinheiro, sob a vigilância de quem entende de números.</h1>
+        <p class="sub">A Skar Finance acompanha cada movimento da sua carteira em tempo real e simplifica decisões de investimento — sem jargão, sem ruído.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#entrar">Criar conta</a>
+          <a class="btn btn-ghost" href="#entrar">Entrar</a>
+        </div>
+      </div>
+      <div class="ticker-card">
+        <div class="ticker-top">
+          <div>
+            <div class="ticker-label">Patrimônio total</div>
+          </div>
+          <div class="ticker-pct" id="hero-pct">+0,0%</div>
+        </div>
+        <div class="ticker-value mono" id="hero-value">R$ 0</div>
+        <div class="bars" id="hero-bars"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="simulador">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">PROJEÇÃO</p>
+        <h2>Veja seu dinheiro crescer antes de investir um centavo</h2>
+        <p>Ajuste a rentabilidade esperada e acompanhe a projeção mudar na hora.</p>
+      </div>
+      <div class="sim-grid">
+        <div class="sim-controls">
+          <div class="control">
+            <label>Rentabilidade anual <span class="val mono" id="out-taxa">9,0%</span></label>
+            <input type="range" id="in-taxa" min="1" max="20" step="0.5" value="9">
+          </div>
+          <p style="font-size:13px; color:var(--text-faint); margin-top:6px;">Projeção baseada em aporte inicial de R$ 1.000, aporte mensal de R$ 300, ao longo de 10 anos.</p>
+        </div>
+        <div class="sim-result">
+          <div class="sim-result-row"><span class="k">Total investido</span><span class="v mono" id="res-investido">R$ 37.000</span></div>
+          <div class="sim-result-row"><span class="k">Rendimento estimado</span><span class="v mono" id="res-rendimento" style="color:var(--success)">R$ 21.480</span></div>
+          <div class="sim-total">
+            <div class="k">Patrimônio projetado</div>
+            <div class="v mono" id="res-total">R$ 58.480</div>
+          </div>
+          <div class="sim-chart" id="sim-chart"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="entrar">
+    <div class="wrap" style="text-align:center;">
+      <p class="eyebrow" style="justify-content:center; display:flex;">COMECE AGORA</p>
+      <h2 style="max-width:520px; margin:0 auto 28px;">Sua conta na Skar Finance leva menos de dois minutos para abrir</h2>
+      <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <a class="btn btn-primary" href="#">Criar conta</a>
+        <a class="btn btn-ghost" href="#">Entrar</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <div class="foot-brand">
+      <span>POWERED BY ALLBINOTECH</span>
+    </div>
+    <p>© 2026 Skar Finance. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  // ---------- Hero ticker ----------
+  (function(){
+    const target = 128450;
+    const valueEl = document.getElementById('hero-value');
+    const pctEl = document.getElementById('hero-pct');
+    const barsWrap = document.getElementById('hero-bars');
+    const heights = [30,45,38,52,60,55,70,66,80,92,86,100];
+    heights.forEach(h => {
+      const b = document.createElement('div');
+      b.className = 'bar';
+      barsWrap.appendChild(b);
+    });
+    const bars = barsWrap.querySelectorAll('.bar');
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function formatBRL(n){
+      return 'R$ ' + Math.round(n).toLocaleString('pt-BR');
+    }
+
+    if (reduceMotion) {
+      valueEl.textContent = formatBRL(target);
+      pctEl.textContent = '+18,4%';
+      bars.forEach((b,i) => { b.style.height = heights[i] + '%'; if (i > heights.length - 4) b.classList.add('up'); });
+    } else {
+      let start = null;
+      const duration = 1400;
+      function step(ts){
+        if (!start) start = ts;
+        const p = Math.min((ts - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        valueEl.textContent = formatBRL(target * eased);
+        pctEl.textContent = '+' + (18.4 * eased).toFixed(1).replace('.', ',') + '%';
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+      setTimeout(() => {
+        bars.forEach((b,i) => {
+          setTimeout(() => {
+            b.style.height = heights[i] + '%';
+            if (i > heights.length - 4) b.classList.add('up');
+          }, i * 45);
+        });
+      }, 200);
+    }
+  })();
+
+  // ---------- Simulator ----------
+  (function(){
+    const P0 = 1000;
+    const PM = 300;
+    const years = 10;
+
+    const taxa = document.getElementById('in-taxa');
+    const outTaxa = document.getElementById('out-taxa');
+
+    const resInvestido = document.getElementById('res-investido');
+    const resRendimento = document.getElementById('res-rendimento');
+    const resTotal = document.getElementById('res-total');
+    const chart = document.getElementById('sim-chart');
+
+    function brl(n){
+      return 'R$ ' + Math.round(n).toLocaleString('pt-BR');
+    }
+
+    function yearlyBalancesFor(annualRate){
+      const monthlyRate = Math.pow(1 + annualRate, 1/12) - 1;
+      let balance = P0;
+      const balances = [];
+      let totalInvested = P0;
+      for (let m = 1; m <= years*12; m++){
+        balance = balance * (1 + monthlyRate) + PM;
+        totalInvested += PM;
+        if (m % 12 === 0) balances.push(balance);
+      }
+      return { balances, totalInvested, finalTotal: balance };
+    }
+
+    // Fixed ceiling so bar heights are comparable across different rates,
+    // instead of each draw rescaling to its own maximum.
+    const chartCeiling = yearlyBalancesFor(parseFloat(taxa.max) / 100).finalTotal;
+
+    function calc(){
+      const annualRate = parseFloat(taxa.value) / 100;
+      outTaxa.textContent = (annualRate*100).toFixed(1).replace('.', ',') + '%';
+
+      const { balances, totalInvested, finalTotal } = yearlyBalancesFor(annualRate);
+      const rendimento = finalTotal - totalInvested;
+
+      resInvestido.textContent = brl(totalInvested);
+      resRendimento.textContent = brl(rendimento);
+      resTotal.textContent = brl(finalTotal);
+
+      chart.innerHTML = '';
+      balances.forEach(v => {
+        const bar = document.createElement('div');
+        bar.className = 'bar';
+        bar.style.height = Math.max((v / chartCeiling) * 100, 3) + '%';
+        chart.appendChild(bar);
+      });
+    }
+
+    taxa.addEventListener('input', calc);
+    calc();
+  })();
+</script>
+
+</body>
+</html>

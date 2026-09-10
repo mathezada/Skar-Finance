@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>SKAR FINANCE | Criar conta</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="cadastro.css">
+</head>
+
+<body>
+
+  <main class="cadastro-page">
+
+    <div class="cadastro-box">
+
+      <a class="cadastro-brand" href="index.html">
+        <span class="brand-name">
+          SKAR<span>·</span>FINANCE
+        </span>
+      </a>
+
+      <div class="cadastro-head">
+
+        <h1>Crie sua conta</h1>
+
+        <p>
+          Preencha seus dados para começar a usar a Skar Finance.
+        </p>
+      </div>
+
+      <form id="form-cadastro">
+
+        <div class="cadastro-field">
+          <label for="nome">Nome</label>
+
+          <input
+            type="text"
+            id="nome"
+            name="nome"
+            placeholder="Seu nome"
+            autocomplete="name"
+            required
+          >
+        </div>
+
+        <div class="cadastro-field">
+          <label for="email">E-mail</label>
+
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="seuemail@empresa.com"
+            autocomplete="email"
+            required
+          >
+        </div>
+
+        <div class="cadastro-field">
+          <label for="senha">Senha</label>
+
+          <div class="password-box">
+
+            <input
+              type="password"
+              id="senha"
+              name="senha"
+              placeholder="Mínimo de 6 caracteres"
+              autocomplete="new-password"
+              minlength="6"
+              required
+            >
+
+            <button
+              type="button"
+              id="mostrar-senha"
+            >
+              Mostrar
+            </button>
+
+          </div>
+        </div>
+
+        <div class="cadastro-field">
+          <label for="confirmar-senha">Confirmar senha</label>
+
+          <input
+            type="password"
+            id="confirmar-senha"
+            name="confirmar-senha"
+            placeholder="Digite a senha novamente"
+            autocomplete="new-password"
+            minlength="6"
+            required
+          >
+        </div>
+
+        <p id="cadastro-message"></p>
+
+        <button
+          type="submit"
+          class="cadastro-submit"
+        >
+          Criar conta
+        </button>
+
+      </form>
+
+      <div class="cadastro-footer">
+        <span>Já possui uma conta?</span>
+
+        <a href="login.html">
+          Entrar
+        </a>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script src="cadastro.js"></script>
+
+</body>
+</html>

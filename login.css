@@ -1,0 +1,271 @@
+:root {
+  --bg: #060607;
+  --surface: #0f0f12;
+  --surface-2: #17171c;
+  --line: #28282f;
+  --text: #ece9e4;
+  --text-dim: #8d8d96;
+  --text-faint: #57575f;
+  --accent: #7d6ef0;
+  --accent-soft: rgba(125, 110, 240, 0.12);
+  --success: #4fae5a;
+  --danger: #e2504f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Space Grotesk", sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+.login-page {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px 20px;
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(125, 110, 240, 0.14),
+      transparent 40%
+    ),
+    var(--bg);
+}
+
+.login-box {
+  width: 100%;
+  max-width: 430px;
+
+  padding: 38px;
+
+  border: 1px solid var(--line);
+  border-radius: 18px;
+
+  background: var(--surface);
+
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.4);
+}
+
+.login-brand {
+  display: flex;
+  justify-content: center;
+
+  margin-bottom: 40px;
+
+  text-decoration: none;
+}
+
+.brand-name {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+}
+
+.brand-name span {
+  color: var(--accent);
+}
+
+.login-head {
+  text-align: center;
+
+  margin-bottom: 32px;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+
+  color: var(--accent);
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+}
+
+.login-head h1 {
+  margin: 0 0 12px;
+
+  font-size: 32px;
+  font-weight: 600;
+}
+.login-head p {
+  margin: 0;
+
+  color: var(--text-dim);
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.login-field {
+  margin-bottom: 20px;
+}
+
+.login-field label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: var(--text-dim);
+
+  font-size: 13px;
+}
+
+.login-field input {
+  width: 100%;
+  height: 50px;
+
+  padding: 0 14px;
+
+  border: 1px solid var(--line);
+  border-radius: 10px;
+
+  background: var(--surface-2);
+
+  color: var(--text);
+
+  outline: none;
+
+  transition: 0.2s;
+}
+
+.login-field input::placeholder {
+  color: var(--text-faint);
+}
+
+.login-field input:focus {
+  border-color: var(--accent);
+
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.password-box {
+  position: relative;
+}
+
+.password-box input {
+  padding-right: 85px;
+}
+
+.password-box button {
+  position: absolute;
+
+  top: 50%;
+  right: 12px;
+
+  transform: translateY(-50%);
+
+  padding: 5px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: var(--accent);
+
+  cursor: pointer;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+#login-message {
+  min-height: 20px;
+
+  margin: 4px 0 10px;
+
+  font-size: 13px;
+}
+
+.login-message-error {
+  color: var(--danger);
+}
+
+.login-message-success {
+  color: var(--success);
+}
+
+.login-submit {
+  width: 100%;
+  height: 50px;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: var(--accent);
+
+  color: #0b0a14;
+
+  cursor: pointer;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition: 0.2s;
+}
+
+.login-submit:hover {
+  background: #9284f3;
+}
+
+.login-submit:active {
+  transform: scale(0.98);
+}
+
+.login-footer {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+
+  margin-top: 24px;
+
+  color: var(--text-dim);
+
+  font-size: 13px;
+}
+
+.login-footer a {
+  color: var(--accent);
+
+  text-decoration: none;
+}
+
+.login-footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 520px) {
+  .login-page {
+    padding: 24px 16px;
+  }
+
+  .login-box {
+    padding: 28px 22px;
+  }
+
+  .login-head h1 {
+    font-size: 27px;
+  }
+}
