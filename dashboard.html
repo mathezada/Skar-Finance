@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Skar Finance - Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+<section id="app" class="hide"></section>
+<div id="modal"></div>
+
+<script src="dashboard.js"></script>
+<script>
+/* Abre o dashboard sozinho. Se existir uma sessão salva pelo login, usa ela; senão entra como convidado. */
+window.aoSair=function(){location.href='index.html'};
+(function(){
+  var u=null;
+  try{
+    u=JSON.parse(
+      sessionStorage.getItem('skarSession')||
+      localStorage.getItem('skar_s')||
+      localStorage.getItem('skarUser')||
+      'null'
+    )
+  }catch(e){}
+  abrirDashboard(u&&u.email?u:{email:'convidado@skar.finance',name:'Matheus'});
+})();
+</script>
+</body>
+</html>

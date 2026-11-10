@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Recupere sua senha da SKAR Finance."
+  >
+
+  <title>Recuperar senha | SKAR Finance</title>
+
+  <meta name="apple-mobile-web-app-title" content="SKAR Finance">
+  <link rel="icon" type="image/jpeg" href="assets/skar-app-icon-v1.jpeg?v=20261029-1">
+  <link rel="apple-touch-icon" href="assets/skar-app-icon-v1.jpeg?v=20261029-1">
+  <link rel="manifest" href="manifest.json?v=20261029-1">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="auth-page compact-card">
+  <div class="page-shell">
+
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span
+          class="brand-mark"
+          aria-hidden="true"
+        >
+          <i></i>
+          <i></i>
+          <i></i>
+        </span>
+
+        <span>
+          SKAR <strong>FINANCE</strong>
+        </span>
+      </a>
+
+      <a class="back-link" href="index.html">
+        ← Voltar para o login
+      </a>
+    </header>
+
+    <main class="single-card-layout">
+
+      <section
+        class="auth-card recovery-card"
+        aria-labelledby="recoveryTitle"
+      >
+        <div class="card-heading">
+          <span class="mini-mark">
+            ✉
+          </span>
+
+          <div>
+            <p>RECUPERE O ACESSO</p>
+
+            <h1 id="recoveryTitle">
+              Esqueceu sua senha?
+            </h1>
+          </div>
+        </div>
+
+        <p class="card-intro">
+          Informe o e-mail cadastrado. Vamos simular o envio
+          das instruções de recuperação.
+        </p>
+
+        <form id="recoveryForm" novalidate>
+
+          <label class="field">
+            <span class="field-icon">
+              ✉
+            </span>
+
+            <span class="sr-only">
+              E-mail
+            </span>
+
+            <input
+              id="recoveryEmail"
+              name="email"
+              type="email"
+              autocomplete="email"
+              placeholder="Seu e-mail"
+              required
+            >
+          </label>
+
+          <p
+            class="field-error"
+            id="recoveryEmailError"
+          ></p>
+
+          <button
+            class="primary-button"
+            type="submit"
+          >
+            Enviar instruções
+          </button>
+
+          <p
+            class="form-message"
+            id="recoveryMessage"
+            role="status"
+            aria-live="polite"
+          ></p>
+        </form>
+
+        <p class="switch-page">
+          <a href="index.html">
+            Voltar para entrar
+          </a>
+        </p>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Crie sua conta na SKAR Finance."
+  >
+
+  <title>Criar conta | SKAR Finance</title>
+
+  <meta name="apple-mobile-web-app-title" content="SKAR Finance">
+  <link rel="icon" type="image/jpeg" href="assets/skar-app-icon-v1.jpeg?v=20261029-1">
+  <link rel="apple-touch-icon" href="assets/skar-app-icon-v1.jpeg?v=20261029-1">
+  <link rel="manifest" href="manifest.json?v=20261029-1">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="auth-page compact-card">
+  <div class="page-shell">
+
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span
+          class="brand-mark"
+          aria-hidden="true"
+        >
+          <i></i>
+          <i></i>
+          <i></i>
+        </span>
+
+        <span>
+          SKAR <strong>FINANCE</strong>
+        </span>
+      </a>
+
+      <a class="back-link" href="index.html">
+        ← Voltar para o login
+      </a>
+    </header>
+
+    <main class="single-card-layout">
+
+      <section
+        class="auth-card"
+        aria-labelledby="registerTitle"
+      >
+        <div class="card-heading">
+          <span class="mini-mark">
+            ＋
+          </span>
+
+          <div>
+            <p>COMECE AGORA</p>
+
+            <h1 id="registerTitle">
+              Crie sua conta
+            </h1>
+          </div>
+        </div>
+
+        <p class="card-intro">
+          Organize os ganhos e as despesas da sua empresa
+          em um só lugar.
+        </p>
+
+        <form id="registerForm" novalidate>
+
+          <label class="field">
+            <span class="field-icon">
+              ♙
+            </span>
+
+            <span class="sr-only">
+              Nome completo
+            </span>
+
+            <input
+              id="registerName"
+              name="name"
+              type="text"
+              autocomplete="name"
+              placeholder="Nome completo"
+              required
+            >
+          </label>
+
+          <p
+            class="field-error"
+            id="registerNameError"
+          ></p>
+
+          <label class="field">
+            <span class="field-icon">
+              ✉
+            </span>
+
+            <span class="sr-only">
+              E-mail
+            </span>
+
+            <input
+              id="registerEmail"
+              name="email"
+              type="email"
+              autocomplete="email"
+              placeholder="E-mail"
+              required
+            >
+          </label>
+
+          <p
+            class="field-error"
+            id="registerEmailError"
+          ></p>
+
+          <label class="field">
+            <span class="field-icon">
+              ⌑
+            </span>
+
+            <span class="sr-only">
+              Senha
+            </span>
+
+            <input
+              id="registerPassword"
+              name="password"
+              type="password"
+              autocomplete="new-password"
+              placeholder="Senha (mínimo de 6 caracteres)"
+              minlength="6"
+              required
+            >
+
+            <button
+              class="password-toggle"
+              type="button"
+              aria-label="Mostrar senha"
+              aria-pressed="false"
+            >
+              ◉
+            </button>
+          </label>
+
+          <p
+            class="field-error"
+            id="registerPasswordError"
+          ></p>
+
+          <label class="field">
+            <span class="field-icon">
+              ⌑
+            </span>
+
+            <span class="sr-only">
+              Confirme a senha
+            </span>
+
+            <input
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              autocomplete="new-password"
+              placeholder="Confirme a senha"
+              required
+            >
+
+            <button
+              class="password-toggle"
+              type="button"
+              aria-label="Mostrar senha"
+              aria-pressed="false"
+            >
+              ◉
+            </button>
+          </label>
+
+          <p
+            class="field-error"
+            id="confirmPasswordError"
+          ></p>
+
+          <label class="terms">
+            <input
+              id="terms"
+              type="checkbox"
+              required
+            >
+
+            <span>✓</span>
+
+            Li e aceito os termos de uso.
+          </label>
+
+          <p
+            class="field-error"
+            id="termsError"
+          ></p>
+
+          <button
+            class="primary-button"
+            type="submit"
+          >
+            Criar conta
+          </button>
+
+          <p
+            class="form-message"
+            id="registerMessage"
+            role="status"
+            aria-live="polite"
+          ></p>
+        </form>
+
+        <p class="switch-page">
+          Já tem uma conta?
+
+          <a href="index.html">
+            Entrar
+          </a>
+        </p>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

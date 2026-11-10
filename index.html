@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#003525">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <meta
+    name="description"
+    content="Acesse sua conta SKAR Finance e acompanhe sua saúde financeira."
+  >
+
+  <title>Entrar | SKAR Finance</title>
+
+  <meta name="apple-mobile-web-app-title" content="SKAR Finance">
+  <link rel="icon" type="image/jpeg" href="assets/skar-app-icon-v1.jpeg?v=20261029-1">
+  <link rel="apple-touch-icon" href="assets/skar-app-icon-v1.jpeg?v=20261029-1">
+  <link rel="manifest" href="manifest.json?v=20261029-1">
+
+  <link rel="stylesheet" href="styles.css?v=20261031-9">
+</head>
+
+<body class="auth-page login-page">
+  <div class="page-shell">
+
+    <header class="site-header">
+      <a
+        class="brand"
+        href="index.html"
+        aria-label="SKAR Finance - página inicial"
+      >
+        <span class="brand-mark" aria-hidden="true">
+          <i></i>
+          <i></i>
+          <i></i>
+        </span>
+
+        <span>
+          SKAR <strong>FINANCE</strong>
+        </span>
+      </a>
+
+      <nav aria-label="Navegação principal">
+        <a href="#inicio">Início</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#recursos">Recursos</a>
+        <a href="mailto:contato@skarfinance.com">Contato</a>
+
+        <a
+          class="nav-login"
+          href="index.html"
+          aria-current="page"
+        >
+          Entrar
+        </a>
+      </nav>
+    </header>
+
+    <main class="auth-layout" id="inicio">
+
+      <section class="mobile-login-intro" aria-label="Boas-vindas">
+        <h1>
+          Domine
+          <span>suas finanças.</span>
+        </h1>
+      </section>
+
+      <section
+        class="hero-copy"
+        aria-labelledby="hero-title"
+      >
+        <p class="eyebrow">
+          DISCIPLINA GERA LIBERDADE
+        </p>
+
+        <h1 id="hero-title">
+          SKAR
+          <br>
+          <span>FINANCE</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Controle suas finanças. Construa seu futuro.
+        </p>
+
+        <div class="benefits" id="recursos">
+          <article>
+            <span class="benefit-icon">▥</span>
+
+            <p>
+              Acompanhe
+              <br>
+              seus resultados
+            </p>
+          </article>
+
+          <article>
+            <span class="benefit-icon">▰</span>
+
+            <p>
+              Controle
+              <br>
+              suas despesas
+            </p>
+          </article>
+
+          <article>
+            <span class="benefit-icon">◎</span>
+
+            <p>
+              Conquiste
+              <br>
+              seus objetivos
+            </p>
+          </article>
+        </div>
+
+        <blockquote id="sobre">
+          “Grandes resultados são construídos com disciplina.”
+
+          <cite>
+            — SKAR FINANCE
+          </cite>
+        </blockquote>
+      </section>
+
+      <section
+        class="auth-card"
+        aria-labelledby="login-title"
+      >
+        <div class="card-brand" aria-hidden="true">
+          <span class="brand-mark large">
+            <i></i>
+            <i></i>
+            <i></i>
+          </span>
+
+          <div>
+            <b>
+              SKAR <em>FINANCE</em>
+            </b>
+
+            <small>
+              MAIS QUE NÚMEROS, LIBERDADE
+            </small>
+          </div>
+        </div>
+
+        <h2 id="login-title" class="sr-only">
+          Entrar na sua conta
+        </h2>
+
+        <form id="loginForm" novalidate>
+
+          <label class="field">
+            <span class="field-icon" aria-hidden="true">
+              ✉
+            </span>
+
+            <span class="sr-only">
+              E-mail
+            </span>
+
+            <input
+              id="loginEmail"
+              name="email"
+              type="email"
+              autocomplete="email"
+              placeholder="E-mail"
+              required
+            >
+          </label>
+
+          <p
+            class="field-error"
+            id="loginEmailError"
+          ></p>
+
+          <label class="field">
+            <span class="field-icon" aria-hidden="true">
+              ⌑
+            </span>
+
+            <span class="sr-only">
+              Senha
+            </span>
+
+            <input
+              id="loginPassword"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              placeholder="Senha"
+              minlength="6"
+              required
+            >
+
+            <button
+              class="password-toggle"
+              type="button"
+              aria-label="Mostrar senha"
+              aria-pressed="false"
+            >
+              ◉
+            </button>
+          </label>
+
+          <p
+            class="field-error"
+            id="loginPasswordError"
+          ></p>
+
+          <div class="form-options">
+            <label class="check-label">
+              <input
+                id="rememberMe"
+                type="checkbox"
+              >
+
+              <span>✓</span>
+
+              Lembrar de mim
+            </label>
+
+            <a href="recuperar-senha.html">
+              Esqueceu a senha?
+            </a>
+          </div>
+
+          <button
+            class="primary-button"
+            type="submit"
+          >
+            Entrar
+            <span class="mobile-only mobile-submit-arrow" aria-hidden="true">→</span>
+          </button>
+
+          <p
+            class="form-message"
+            id="loginMessage"
+            role="status"
+            aria-live="polite"
+          ></p>
+        </form>
+
+        <div class="divider">
+          <span>ou</span>
+        </div>
+
+        <button
+          class="google-button"
+          type="button"
+          id="googleButton"
+        >
+          <span>G</span>
+          <span class="desktop-only-text">Entrar com Google</span>
+          <span class="mobile-only">Entrar com o Google</span>
+        </button>
+
+        <p class="switch-page">
+          Ainda não tem uma conta?
+
+          <a href="cadastro.html">
+            <span class="desktop-only-text">Cadastre-se</span>
+            <span class="mobile-only">Criar conta</span>
+          </a>
+        </p>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

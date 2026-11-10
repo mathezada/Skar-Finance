@@ -1,0 +1,19 @@
+{
+  "name": "SKAR Finance",
+  "short_name": "SKAR Finance",
+  "description": "Controle financeiro pessoal SKAR Finance",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#00170f",
+  "theme_color": "#002419",
+  "icons": [
+    {
+      "src": "assets/skar-app-icon-v1.jpeg",
+      "sizes": "1254x1254",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}
