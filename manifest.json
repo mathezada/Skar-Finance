@@ -10,9 +10,9 @@
   "theme_color": "#002419",
   "icons": [
     {
-      "src": "assets/skar-app-icon-v1.jpeg",
-      "sizes": "1254x1254",
-      "type": "image/jpeg",
+      "src": "assets/skar-app-icon-v2.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ]

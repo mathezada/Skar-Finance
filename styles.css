@@ -1513,3 +1513,79 @@ blockquote cite {
     transform: translateY(clamp(24px, 3.8dvh, 38px)) !important;
   }
 }
+
+/* CORREÇÃO FINAL DO LOGIN: fundo completo no PC e formulário visível no celular. */
+@media (min-width: 721px) {
+  .auth-page::after {
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background-image: url("assets/hero-lion.png") !important;
+    background-position: center center !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+  }
+}
+
+@media (max-width: 720px) {
+  html {
+    min-height: 100%;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    background: #00170f url("assets/mobile-panther-bg-v2.png") center top / cover no-repeat !important;
+  }
+
+  body.login-page {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 100svh !important;
+    max-height: none !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    touch-action: pan-y !important;
+    background: transparent !important;
+  }
+
+  body.login-page::after {
+    position: fixed !important;
+    inset: -4px !important;
+    width: auto !important;
+    height: auto !important;
+    background-image: url("assets/mobile-panther-bg-v2.png") !important;
+    background-position: center top !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+  }
+
+  .login-page .page-shell {
+    height: auto !important;
+    min-height: 100svh !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .login-page .auth-layout {
+    min-height: calc(100svh - 78px) !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: clamp(86px, 15svh, 150px) 0 max(24px, env(safe-area-inset-bottom)) !important;
+  }
+
+  .login-page .mobile-login-intro,
+  .login-page .auth-layout > .auth-card {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .login-page .mobile-login-intro {
+    margin: 0 auto 14px !important;
+  }
+
+  .login-page .auth-layout > .auth-card {
+    margin: 0 auto !important;
+  }
+}
