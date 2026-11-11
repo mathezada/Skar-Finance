@@ -114,7 +114,7 @@
 
     loginForm.addEventListener(
       "submit",
-      (event) => {
+      async (event) => {
         event.preventDefault();
 
         const email =
@@ -152,31 +152,6 @@
           return;
         }
 
-        const savedUser =
-          JSON.parse(
-            localStorage.getItem(
-              "skarUser"
-            ) || "null"
-          );
-
-        if (
-          savedUser &&
-          (
-            savedUser.email !==
-              email.value.trim() ||
-            savedUser.password !==
-              password.value
-          )
-        ) {
-          message.textContent =
-            "E-mail ou senha incorretos.";
-
-          message.className =
-            "form-message error";
-
-          return;
-        }
-
         if (
           $("#rememberMe").checked
         ) {
@@ -190,30 +165,28 @@
           );
         }
 
-        const session = {
-          name:
-            savedUser?.name ||
-            "Cliente",
+        if (!window.skarSupabase) {
+          message.textContent = "Não foi possível conectar ao banco de dados.";
+          message.className = "form-message error";
+          return;
+        }
 
-          email:
-            email.value.trim()
-        };
+        message.textContent = "Entrando…";
+        message.className = "form-message";
 
-        sessionStorage.setItem(
-          "skarSession",
-          JSON.stringify(session)
-        );
+        const { error } = await window.skarSupabase.auth.signInWithPassword({
+          email: email.value.trim(),
+          password: password.value
+        });
 
-        message.textContent =
-          "Acesso confirmado. Abrindo seu painel…";
+        if (error) {
+          message.textContent = "E-mail ou senha incorretos.";
+          message.className = "form-message error";
+          return;
+        }
 
-        message.className =
-          "form-message";
-
-        setTimeout(() => {
-          window.location.href =
-            "dashboard.html";
-        }, 500);
+        message.textContent = "Acesso confirmado. Abrindo seu painel…";
+        window.location.href = "dashboard.html";
       }
     );
   }
@@ -228,7 +201,7 @@
   if (registerForm) {
     registerForm.addEventListener(
       "submit",
-      (event) => {
+      async (event) => {
         event.preventDefault();
 
         const name =
@@ -305,32 +278,38 @@
           return;
         }
 
-        const newUser = {
-          name:
-            name.value.trim(),
+        if (!window.skarSupabase) {
+          message.textContent = "Não foi possível conectar ao banco de dados.";
+          message.className = "form-message error";
+          return;
+        }
 
-          email:
-            email.value.trim(),
+        message.textContent = "Criando sua conta…";
+        message.className = "form-message";
 
-          password:
-            password.value
-        };
+        const { data, error } = await window.skarSupabase.auth.signUp({
+          email: email.value.trim(),
+          password: password.value,
+          options: {
+            data: { full_name: name.value.trim() }
+          }
+        });
 
-        localStorage.setItem(
-          "skarUser",
-          JSON.stringify(newUser)
-        );
+        if (error) {
+          message.textContent = error.message.includes("already")
+            ? "Este e-mail já possui uma conta."
+            : "Não foi possível criar a conta. Tente novamente.";
+          message.className = "form-message error";
+          return;
+        }
 
-        message.textContent =
-          "Conta criada! Redirecionando para o login…";
+        if (data.session) {
+          window.location.href = "dashboard.html";
+          return;
+        }
 
-        message.className =
-          "form-message";
-
-        setTimeout(() => {
-          window.location.href =
-            "index.html";
-        }, 800);
+        message.textContent = "Conta criada! Confira seu e-mail para confirmar o cadastro.";
+        message.className = "form-message";
       }
     );
   }
@@ -345,7 +324,7 @@
   if (recoveryForm) {
     recoveryForm.addEventListener(
       "submit",
-      (event) => {
+      async (event) => {
         event.preventDefault();
 
         const email =
@@ -364,15 +343,26 @@
           return;
         }
 
-        message.textContent =
-          `Instruções enviadas para ${email.value.trim()} (simulação).`;
+        if (!window.skarSupabase) {
+          message.textContent = "Não foi possível conectar ao banco de dados.";
+          message.className = "form-message error";
+          return;
+        }
 
-        message.className =
-          "form-message";
+        const { error } = await window.skarSupabase.auth.resetPasswordForEmail(
+          email.value.trim(),
+          { redirectTo: `${window.location.origin}/index.html` }
+        );
 
-        recoveryForm
-          .querySelector("button")
-          .disabled = true;
+        if (error) {
+          message.textContent = "Não foi possível enviar as instruções. Tente novamente.";
+          message.className = "form-message error";
+          return;
+        }
+
+        message.textContent = `Instruções enviadas para ${email.value.trim()}.`;
+        message.className = "form-message";
+        recoveryForm.querySelector("button").disabled = true;
       }
     );
   }
@@ -386,15 +376,25 @@
 
   googleButton?.addEventListener(
     "click",
-    () => {
+    async () => {
       const message =
         $("#loginMessage");
 
-      message.textContent =
-        "O login com Google precisa ser ligado a um serviço de autenticação.";
+      if (!window.skarSupabase) {
+        message.textContent = "Não foi possível conectar ao banco de dados.";
+        message.className = "form-message error";
+        return;
+      }
 
-      message.className =
-        "form-message error";
+      const { error } = await window.skarSupabase.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo: `${window.location.origin}/dashboard.html` }
+      });
+
+      if (error) {
+        message.textContent = "O login com Google ainda não está disponível.";
+        message.className = "form-message error";
+      }
     }
   );
 

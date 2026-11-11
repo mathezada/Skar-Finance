@@ -1521,9 +1521,21 @@ blockquote cite {
     width: 100vw !important;
     height: 100vh !important;
     background-image: url("assets/hero-lion.png") !important;
-    background-position: center center !important;
+    /* Move o cenário para a esquerda sem ampliar ou deformar a imagem. */
+    background-position: calc(50% - 110px) center !important;
     background-size: cover !important;
     background-repeat: no-repeat !important;
+  }
+}
+
+/* Ajuste de posição somente no computador. */
+@media (min-width: 1100px) {
+  .login-page .hero-copy {
+    transform: translateX(clamp(64px, 5vw, 108px)) !important;
+  }
+
+  .login-page .auth-layout > .auth-card {
+    transform: translateX(clamp(22px, 2.4vw, 48px)) !important;
   }
 }
 

@@ -1,10 +1,21 @@
-/*
-  Configuração pública do Supabase.
-  Preencha somente com a URL do projeto e a chave PUBLICÁVEL (publishable/anon).
-  Nunca coloque a chave service_role neste arquivo.
-*/
-window.SKAR_SUPABASE = {
-  url: "",
-  publishableKey: ""
-};
+(function () {
+  const SUPABASE_URL = "https://jhebbjduvustnsdpxkqx.supabase.co";
+  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_wHzTwnwOGMPk8YNd3_AO0w_L0fgLFUD";
 
+  if (!window.supabase?.createClient) {
+    console.error("A biblioteca do Supabase não foi carregada.");
+    return;
+  }
+
+  window.skarSupabase = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY,
+    {
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: true
+      }
+    }
+  );
+})();

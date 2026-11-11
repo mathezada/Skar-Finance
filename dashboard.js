@@ -13,16 +13,38 @@ const DATA_VERSION='zero-v1';
 function toast(t){const d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2600)}
 function iso(off,day){const d=new Date();d.setDate(1);d.setMonth(d.getMonth()-off);d.setDate(Math.min(day,28));return d.toISOString().slice(0,10)}
 function seed(){return{tx:[],nid:1,inv:[{n:'Renda Fixa',v:0},{n:'Ações',v:0},{n:'Fundos',v:0},{n:'Criptomoedas',v:0}],goals:[],bud:{Moradia:0,'Alimentação':0,Transporte:0,Lazer:0,'Saúde':0,Outros:0}}}
-function load(){
+async function load(){
+ if(window.skarSupabase&&S.id){
+  const {data,error}=await window.skarSupabase
+   .from('dashboard_state')
+   .select('data')
+   .eq('user_id',S.id)
+   .maybeSingle();
+  if(!error&&data?.data){D=data.data;return}
+  D=seed();
+  await save();
+  return;
+ }
  const versionKey='skar_data_version_'+S.email;
  try{D=JSON.parse(LS.get('skar_d_'+S.email)||'null')}catch(e){D=null}
  if(!D||LS.get(versionKey)!==DATA_VERSION){D=seed();save();LS.set(versionKey,DATA_VERSION)}
 }
-function save(){LS.set('skar_d_'+S.email,JSON.stringify(D))}
+async function save(){
+ LS.set('skar_d_'+S.email,JSON.stringify(D));
+ if(window.skarSupabase&&S.id){
+  const {error}=await window.skarSupabase
+   .from('dashboard_state')
+   .upsert({user_id:S.id,data:D,updated_at:new Date().toISOString()});
+  if(error)toast('Não foi possível sincronizar os dados');
+ }
+}
  
 /* ENTRADA E SAÍDA DO DASHBOARD */
-function abrirDashboard(user){S=user;load();view='home';$('#app').classList.remove('hide');render()}
-function fecharDashboard(){S=D=null;$('#app').classList.add('hide');if(window.aoSair)window.aoSair()}
+async function abrirDashboard(user){S=user;await load();view='home';$('#app').classList.remove('hide');render()}
+async function fecharDashboard(){
+ if(window.skarSupabase)await window.skarSupabase.auth.signOut();
+ S=D=null;$('#app').classList.add('hide');if(window.aoSair)window.aoSair()
+}
  
 /* CÁLCULOS */
 const ym=d=>d.slice(0,7);

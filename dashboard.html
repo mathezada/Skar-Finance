@@ -12,21 +12,22 @@
 <section id="app" class="hide"></section>
 <div id="modal"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
 <script src="dashboard.js"></script>
 <script>
-/* Abre o dashboard sozinho. Se existir uma sessão salva pelo login, usa ela; senão entra como convidado. */
+/* Abre o dashboard somente para usuários autenticados no Supabase. */
 window.aoSair=function(){location.href='index.html'};
-(function(){
-  var u=null;
-  try{
-    u=JSON.parse(
-      sessionStorage.getItem('skarSession')||
-      localStorage.getItem('skar_s')||
-      localStorage.getItem('skarUser')||
-      'null'
-    )
-  }catch(e){}
-  abrirDashboard(u&&u.email?u:{email:'convidado@skar.finance',name:'Matheus'});
+(async function(){
+  if(!window.skarSupabase){ location.href='index.html'; return; }
+  const {data:{session}}=await window.skarSupabase.auth.getSession();
+  if(!session?.user){ location.href='index.html'; return; }
+  const user=session.user;
+  await abrirDashboard({
+    id:user.id,
+    email:user.email,
+    name:user.user_metadata?.full_name||user.email.split('@')[0]
+  });
 })();
 </script>
 </body>
